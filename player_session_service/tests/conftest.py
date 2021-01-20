@@ -1,7 +1,6 @@
 # Imports
 import os
 import pytest
-import logging
 from datetime import datetime
 from flask import Flask
 from service.routes import bp
@@ -26,7 +25,6 @@ def app(request):
 
     curr_dir:str = os.path.dirname(os.path.abspath(__file__))
     data_path:str = f"{curr_dir}/../data/assignment_data.jsonl.bz2"
-    logging.error(data_path)
 
     bp.config['data_path'] = data_path
     ctx = app.app_context()
