@@ -9,7 +9,7 @@ conda env create --name player_session_insights  --file=player_session_insights.
 conda activate player_session_insights
 python -m ipykernel install --user --name=player-session-insights
 `
-3. Transfer file assignment_data.jsonl.bz2 data/
+3. Create directory data and transfer file assignment_data.jsonl.bz2 data/
 4. Load notebook on jupyter notebook player_session_insights.ipynb
 
 
