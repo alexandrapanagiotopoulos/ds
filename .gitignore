@@ -1,5 +1,6 @@
 # Ignore data
-data/**
+data/assignment_data.jsonl.bz2
+player_session_service/data/assignment_data.jsonl.bz2
 **/.idea/**
 # Byte-compiled / optimized / DLL files
 __pycache__/
