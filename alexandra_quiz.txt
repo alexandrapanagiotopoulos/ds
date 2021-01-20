@@ -1,0 +1,43 @@
+Q1: Which one would you prefer and why?
+
+Prefer option 1.
+    • It is type safe, it’s easier to read, the two dimensional array is easier to understand and debug with 2 for loops, the code is cleaner,
+    • The second option is not easy to understand and has a constraint of size divisible by 4
+    • Option 2 code is confusing for someone reading the code, questions arise when reading the code such as: why the sub sums partitioned into 4, what’s the idea behind, whereas option 1 it’s clear what the code is doing. 
+
+Q2: What controversies do you see in the following API example?
+
+    • POST /users/new -> since it’s HTTP Post it’s expected to create a new user, new keyword is unnecessary.
+    • POST /users/:id/update -> Instead of using post, PUT should be used and update keyword can be dropped
+    • POST /users/:id/rename -> Same as above, rename can be simply a PUT request to /users/:id with parameters name=newname
+    • POST /users/:id/update-timezone -> Same as above, rename can be simply a PUT request to /users/:id with parameters timezone=newtimezone
+    • DELETE /users/delete?id=:id -> no need to use delete?id=”id, delete action is explicit by HTTP DELETE method, DELETE /users/:id is sufficient
+
+ Q3: What problems related to password security can you see in the
+following example?
+
+    • attr_accessor :hashed_password exposes the hashed_password attribute to outside of the class, any object holds the reference of user can either set the new hash_password or get the hashed_password, which is a leak, the user class has methods to check if the password is verified or not, other classes shouldn’t change or get the hashed password.
+    • Salt is constant and exposed, a dynamic salt and not visible in the code would make it more secure.
+
+Q4: What would you give as a feedback for a pull request including this
+code?
+    • I don’t have the whole context of the code but it seems that there is a design problem. Why do we need history  user.transactions.history.deposits; 
+    • It seems more logical  that if we need to get the deposits we can get them from the transactions directly, so I would change the model structure if possible
+    • We can use reduce to calculate the sum = deposits.reduce( (accumulator, currentValue) =>   accumulator + currentValue, 0)
+
+Q5: Find database related issues
+    • First issue Concurrency issues between fetching account and updating. 
+    • Example if 2 requests came to DB when Jane has only 1000, the first and second request comes and executes up to if (fromAccount.credits < amt). Since both of them passes that check for 1000 request, the first one moves the money and the second one remains with no funds in the account, it makes the account go to -1000 which leads to an unexpected behavior.
+    • Also not checking on the validity of the amount. We can have an issue the amount is negative.
+
+Q6: What problems does this method have?
+    • I am missing some context but it seems a wrong design.
+    • Instead of keeping 2 kind balances we can have 1 balance and 2 methods 1 for increaseBalance 1 for decreaseBalance, and we can get rid of the isCredit.
+    • Also there is problem if amount is negative, it can be noted as debit but if it is negative  it actually acts like credit but it changes only the debit balance.
+
+Q7: List four typical solutions to optimize database
+    • Indexes: We can introduce indexes on the tables for the most queried columns, we have to be careful and know exactly what we need, if we add indexes all over it doesn’t help, because index are coming with a cost, it slows down our inserts and updates and they also consume space, Analyzing is important, we need to investigate slow queries, if needed we can change the queries to force using specific indexes. 
+    • If the data gets too big, we can shard the databases, we can split the data and make smaller but multiple database instances.
+    • Normalization or denormalization is another possibility, if we realize we are persisting the same data, we can normalize the data and select by joining the normalized data, or if we are doing extreme normalization we might spend more time on joins, in that case we might need to denormalize.
+
+
