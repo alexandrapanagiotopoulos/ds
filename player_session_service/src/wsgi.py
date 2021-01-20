@@ -29,7 +29,6 @@ def createApplication() -> Flask:
     current_datetime:datetime = datetime(2016, 12, 1, 0)
     bp.config['current_dt'] = current_datetime
     # Pass cassandra hostnames
-    bp.config['cassandra_hosts'] = ['127.0.0.1']
     curr_dir:str = os.path.dirname(os.path.abspath(__file__))
     data_path:str = f"{curr_dir}/../data/assignment_data.jsonl.bz2"
     bp.config['data_path'] = data_path

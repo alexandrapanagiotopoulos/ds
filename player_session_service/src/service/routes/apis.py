@@ -18,8 +18,7 @@ class ApplicationError(Exception):
 # functions
 @bp.before_request
 def before_request():
-    hosts = bp.config['cassandra_hosts'] 
-    bp.cluster = Cluster(hosts)
+    bp.cluster = Cluster()
     bp.db = bp.cluster.connect('pss_cassandra')
 
 @bp.teardown_request

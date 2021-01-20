@@ -1,5 +1,6 @@
 # Imports
 import os
+import logging
 import pytest
 from datetime import datetime
 from flask import Flask
@@ -21,7 +22,6 @@ def app(request):
 
     current_datetime:datetime = datetime(2016, 12, 1, 0)
     bp.config['current_dt'] = current_datetime
-    bp.config['cassandra_hosts']  = ['127.0.0.1']
 
     curr_dir:str = os.path.dirname(os.path.abspath(__file__))
     data_path:str = f"{curr_dir}/../data/assignment_data.jsonl.bz2"
