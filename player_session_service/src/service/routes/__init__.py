@@ -7,3 +7,4 @@ bp = Blueprint('api', __name__,
                )
 bp.config = {}
 import service.routes.apis
+import service.routes.errors
